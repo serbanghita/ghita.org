@@ -1,0 +1,45 @@
+title: Ghita.org
+description: A minimal Jekyll site powered by no-style-please theme
+url: "https://ghita.org"
+baseurl: ""
+
+# Theme configuration
+theme_config:
+  appearance: "auto" # can be "light", "dark" or "auto"
+  back_home_text: "← home" # customize text for homepage link in post layout
+  date_format: "%B %d, %Y" # customize how date is formatted
+  show_description: true # show blog description in home page
+  lowercase_titles: false # show titles in lowercase in lists
+
+# Build settings
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+sass:
+  style: compressed
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"

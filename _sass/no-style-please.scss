@@ -97,12 +97,20 @@ img {
   margin: 0 auto;
 }
 
-.toc {
+ul.toc {
   margin: 1.5rem 0;
   padding: 1rem;
+  padding-left: 2.5rem;
   border: thin solid black;
+  list-style: disc;
 
-  strong { display: block; margin-bottom: 0.5rem; }
+  &::before {
+    content: "Contents";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: -1.5rem;
+  }
 
   ul {
     margin: 0;

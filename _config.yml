@@ -23,6 +23,9 @@ plugins:
 toc:
   min_level: 2
   max_level: 3
+  list_class: toc
+  item_class: toc-item
+  no_toc_section_class: no-toc
 
 sass:
   style: compressed

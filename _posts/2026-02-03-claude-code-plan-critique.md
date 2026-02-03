@@ -1,11 +1,15 @@
 ---
 layout: post
 title: "Claude Code - Plan, Critique, Execute"
-date: 2026-02-03 10:00:00 -0000
-categories: claude code llms plan critique execute 
+description: "A custom workflow using Claude Code slash commands to write plans, get AI critiques, iterate, and execute - keeping you in control of code changes."
+date: 2026-02-03 10:00:00 +0000
+categories: [ai-workflows, developer-tools]
+tags: [claude-code, llm, planning, software-development]
 ---
 
 > How I Use Claude Code for Planning Changes in My Projects
+
+<!--more-->
 
 When I work on an existing codebase, I often need to make changes that require some thinking beforehand. Adding a feature, refactoring a module, or fixing a complex bug - these are not things I want an AI to just start coding without a plan.
 

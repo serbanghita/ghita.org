@@ -18,6 +18,11 @@ permalink: /blog/:title/
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-toc
+
+toc:
+  min_level: 2
+  max_level: 3
 
 sass:
   style: compressed

@@ -5,11 +5,23 @@ layout: default
 {%-include back_link.html-%}
 
 <article>
+  {%- assign words = content | number_of_words -%}
+  {%- assign mins = words | divided_by: 200 -%}
+  {%- if mins < 1 %}{% assign mins = 1 %}{% endif -%}
   <p class="post-meta">
     <time datetime="{{ page.date }}">{{ page.date | date: site.theme_config.date_format }}</time>
+    · {{ mins }} min read
   </p>
   
   <h1>{{ page.title }}</h1>
 
-  {{ content }}
+  {% if page.toc != false and content | number_of_words > 500 %}
+  <nav class="toc">
+    <strong>Contents</strong>
+    {{ content | toc_only }}
+  </nav>
+  <hr>
+  {% endif %}
+
+  {{ content | inject_anchors }}
 </article>

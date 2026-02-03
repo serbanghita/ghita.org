@@ -96,3 +96,21 @@ img {
   display: block;
   margin: 0 auto;
 }
+
+.toc {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: thin solid black;
+
+  strong { display: block; margin-bottom: 0.5rem; }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  li { margin: 0.2rem 0; }
+
+  a { text-decoration: none; }
+  a:hover { text-decoration: underline; }
+}

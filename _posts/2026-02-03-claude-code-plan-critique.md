@@ -5,13 +5,15 @@ date: 2026-02-03 10:00:00 -0000
 categories: claude code llms plan critique execute 
 ---
 
-# How I Use Claude Code for Planning Changes in My Projects
+> How I Use Claude Code for Planning Changes in My Projects
 
 When I work on an existing codebase, I often need to make changes that require some thinking beforehand. Adding a feature, refactoring a module, or fixing a complex bug - these are not things I want an AI to just start coding without a plan.
 
 So I built a simple workflow using Claude Code slash commands that lets me write a plan, get feedback on it, iterate until I'm happy, and only then execute it.
 
-The repository is at https://github.com/serbanghita/claude-code-plan-critique
+The repository is at [https://github.com/serbanghita/claude-code-plan-critique](https://github.com/serbanghita/claude-code-plan-critique).
+
+---
 
 ## The Problem
 
@@ -30,6 +32,8 @@ Real-world examples:
 2. A game map editor that simulates TiledEditor but with my own JSON conventions and only a couple of tools (select, draw, erase, patrol).
 3. A whiteboard that renders everything in webgl primitives but the underlying state management is handled in an ECS fashion.
 4. A website that has to follow a specific format of pages, which require a very basic client-side and server-side implementation.
+
+---
 
 ## The Workflow
 
@@ -71,6 +75,8 @@ Real-world examples:
 5. `/plan-execute` - Claude implements the plan step by step
 6. `/plan-archive` - Archive the completed plan
 
+---
+
 ## Why This Works for Me
 
 The key is the iteration loop between writing and critique. I'm not asking Claude to write the plan for me - **I write it myself**. But I am asking Claude to review it against:
@@ -85,6 +91,8 @@ This catches problems **before** any code is written. The critique might tell me
 After a few iterations, when the critique comes back clean, I know the plan is solid and execution will go smoothly.
 Most of the time, it has the right result. It matters a lot how much effort I've put into the original plan.
 I also felt that "planning" in a single-dimensional file starts to be limiting ... I wonder what improvements can be done in this area.
+
+---
 
 ## How This Differs from Claude Code's Built-in Plan Mode
 
@@ -103,6 +111,8 @@ The key difference is who writes the plan:
 Plan Mode is useful when you want Claude to figure out how to do something. My workflow is for when I already know what I want - I just want validation that my plan makes sense before execution.
 
 Another practical difference: the critique step checks if your plan can be split into smaller independent plans. Smaller plans mean smaller context windows, which leads to better execution. Plan Mode does not do this.
+
+---
 
 ## Example: What a Plan Looks Like
 
@@ -140,6 +150,8 @@ After running `/plan-critique`, Claude might respond with:
 
 I update my plan based on this feedback, run critique (`/plan-critique`) again, and repeat until the issues are resolved.
 
+---
+
 ## Setting Up Your Project Standards
 
 The critique step relies on having a CLAUDE.md file in your project root. This file tells Claude about your project conventions. It does not need to be complicated. Here is an example:
@@ -166,6 +178,8 @@ When Claude critiques your plan, it checks against these standards. If your plan
 
 Hint: If you're lazy, just tell Claude Code to generate a `CLAUDE.md` file for you and then you can adjust it.
 
+---
+
 ## Keeping Context Small
 
 One thing the critique step does is recommend splitting large plans. If you try to do too much in one plan, Claude might say:
@@ -178,6 +192,8 @@ This matters because smaller plans mean:
 - More focused critique iterations
 - Easier to resume if something fails
 - Independent tasks can proceed without blocking each other
+
+---
 
 ## Getting Started
 

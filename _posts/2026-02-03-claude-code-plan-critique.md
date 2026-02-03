@@ -9,8 +9,6 @@ tags: [claude-code, llm, planning, software-development]
 
 > How I Use Claude Code for Planning Changes in My Projects
 
-<!--more-->
-
 When I work on an existing codebase, I often need to make changes that require some thinking beforehand. Adding a feature, refactoring a module, or fixing a complex bug - these are not things I want an AI to just start coding without a plan.
 
 So I built a simple workflow using Claude Code slash commands that lets me write a plan, get feedback on it, iterate until I'm happy, and only then execute it.

@@ -4,18 +4,16 @@ title: Contact
 permalink: /contact/
 ---
 
-# Contact
-
 Feel free to get in touch!
 
 ## Get in Touch
 
 You can reach out through the following channels:
 
-- **Email**: hello@ghita.org
+- **Email**: serbanghita@gmail.com
+- **LinkedIn**: [linkedin.com/in/serbanghita](https://www.linkedin.com/in/serbanghita)
 - **GitHub**: [github.com/serbanghita](https://github.com/serbanghita)
-- **Website**: [ghita.org](https://ghita.org)
 
 ## About This Site
 
-This website is built with Jekyll and the no-style-please theme, emphasizing simplicity and content over style.
+Views expressed on this page and website are solely my own, and they do not represent the views of my employer or partners.

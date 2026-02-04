@@ -168,4 +168,4 @@ Restart Claude Code if it is already running, then run `/plan-create` to start y
 
 
 [0] Yes, even Waterfall is designed as an iterative process, read the [original paper](https://www.praxisframework.org/files/royce1970.pdf) by Winston Royce.  
-[1] Claude's Plan Mode - https://code.claude.com/docs/en/common-workflows#use-plan-mode-for-safe-code-analysis
+[1] Claude's Plan Mode - [https://code.claude.com/docs/en/common-workflows#use-plan-mode-for-safe-code-analysis](https://code.claude.com/docs/en/common-workflows#use-plan-mode-for-safe-code-analysis)

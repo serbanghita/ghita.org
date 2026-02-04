@@ -9,7 +9,10 @@ tags: [claude-code, llm, planning, software-development]
 
 > How I Use Claude Code for Planning Changes in My Projects
 
-When I work on an existing codebase, I often need to make changes that require some thinking beforehand. Adding a feature, refactoring a module, or fixing a complex bug - these are not things I want an AI to just start coding without a plan.
+If you think about it, every new change in your software, whether is it a **new feature**, **refactor**, **bug fix** or complex **docs** or **specs**,
+you will have a Planning phase. I want to catch all the potential problems in the Planning phase, I don't want to deal with multiple issues
+later when the software project already contains a lot of code, I want to minimize my mental gymnastics later by making a little effort to iterate 
+and re-think my Plan over and over before I Execute it.
 
 So I built a simple workflow using Claude Code slash commands that lets me write a plan, get feedback on it, iterate until I'm happy, and only then execute it.
 
@@ -20,68 +23,75 @@ The repository is at [https://github.com/serbanghita/claude-code-plan-critique](
 ## The Problem
 
 Claude Code is good at executing tasks, but sometimes it just starts writing code before fully understanding what needs to happen.
-On larger changes, this leads to:
+This is not Claude's fault, this is a software engineer planning mistake.  
+Claude cannot infer every edge case, incomplete details, A/B decisions, changes that don't fit architecture.
 
-- Incomplete implementations
-- Missed edge cases
-- Changes that don't fit the existing architecture and system design
-- Wasted time fixing and replanning AI-generated code
-
-I wanted to **stay in control**. Write my own plan, get it reviewed, refine it, and only then let the AI execute it.
-
-Real-world examples:
-1. A game engine that uses specific libraries written by me and an ECS paradigm for working with objects.
-2. A game map editor that simulates TiledEditor but with my own JSON conventions and only a couple of tools (select, draw, erase, patrol).
-3. A whiteboard that renders everything in webgl primitives but the underlying state management is handled in an ECS fashion.
-4. A website that has to follow a specific format of pages, which require a very basic client-side and server-side implementation.
+I wanted to **stay in control** of my project while **letting go** of the coding aspect per-se.
 
 ---
 
 ## The Workflow
 
+Building software is an iterative phase. Call it Waterfall[0], Agile, Lean or whatever the army of consultants and coaches
+stamped into your engineer lizard brain as the right process of developing software is, they all have on thing in common: **iterations**
+
+The iteration comes from `You: Updating the Plan` and then `Claude Code: Critique of Plan`.
+
 ```
-                +------------------+
-                |  /plan-create    |
-                +--------+---------+
-                         |
-                         v
-                +------------------+
-                |  Edit plan.md    |<-----------+
-                +--------+---------+            |
-                         |                      |
-                         v                      |
-                +------------------+            |
-                |  /plan-critique  |        Iteration
-                +--------+---------+            |
-                         |                      |
-                         v                      |
-                +------------------+    No      |
-                | Satisfied?       +-----------+
-                +--------+---------+
-                         | Yes
-                         v
-                +------------------+
-                |  /plan-execute   |
-                +--------+---------+
-                         |
-                         v
-                +------------------+
-                |  /plan-archive   |
-                +------------------+
+  ┌─────────────┐
+  │ Create Plan │
+  └──────┬──────┘
+         │
+         ▼
+  ┌─────────────────────┐
+  │ Update Plan         │◄──────┐
+  │ (N iterations)      │       │
+  └──────────┬──────────┘       │
+             │                  │
+             ▼                  │
+  ┌───────────────────────┐     │
+  │ Claude: Critique Plan │     │
+  │ (N iterations)        │     │
+  └──────────┬────────────┘     │
+             │                  │
+             ▼                  │
+        ┌──────────┐            │
+        │Satisfied?│            │
+        └────┬─────┘            │
+             │                  │
+       ┌─────┴─────┐            │
+       │           │            │
+      Yes          No───────────┘
+       │
+       ▼
+  ┌─────────┐
+  │ Execute │
+  └────┬────┘
+       │
+       ▼
+  ┌─────────┐
+  │ Archive │
+  └─────────┘
 ```
 
-1. `/plan-create` - Creates a folder with a plan.md template
-2. Edit plan.md - Write your plan in plain markdown
-3. `/plan-critique` - Claude reviews your plan against the codebase
-4. Iterate - Read critique, update plan, run critique again
-5. `/plan-execute` - Claude implements the plan step by step
-6. `/plan-archive` - Archive the completed plan
+So after [installing the commands]([https://github.com/serbanghita/claude-code-plan-critique?tab=readme-ov-file#install]) in your project's `.claude` folder,
+in your Claude Code console do the following:
+
+1. `/plan-create` - Creates a folder with a `.planning/[plan name]/plan.md` template
+2. Edit `.planning/[plan name]/plan.md` - Write your plan in plain markdown.
+3. `/plan-critique` - Claude reviews your plan against the codebase.
+4. Iterate - Read critique, update plan, run critique again.
+5. `/plan-execute` - Claude implements the plan step by step.
+6. `/plan-archive` - Archive the completed plan.
 
 ---
 
 ## Why This Works for Me
 
-The key is the iteration loop between writing and critique. I'm not asking Claude to write the plan for me - **I write it myself**. But I am asking Claude to review it against:
+The key, as I said before, is the iteration loop between writing (you) and critique (Claude).  
+I'm not asking Claude to write the plan for me - **I write it myself**. 
+
+But I am asking Claude to review it against:
 
 - The actual codebase (does this file exist? is this the right pattern?)
 - My project standards in `CLAUDE.md`. This is also mandatory in order to save tokens for future planning.
@@ -96,9 +106,10 @@ I also felt that "planning" in a single-dimensional file starts to be limiting .
 
 ---
 
-## How This Differs from Claude Code's Built-in Plan Mode
+## Difference from Claude Code's Built-in Plan Mode
 
-Claude Code has a built-in Plan Mode (press Shift+Tab twice or start with `--permission-mode plan`). It puts Claude in a read-only state where it analyzes your codebase and proposes a plan for you.
+Claude Code has a built-in Plan Mode[1] (press Shift+Tab twice or start with `--permission-mode plan`). 
+It puts Claude in a read-only state where it analyzes your codebase and proposes a plan for you.
 
 The key difference is who writes the plan:
 
@@ -106,79 +117,22 @@ The key difference is who writes the plan:
 |---------------------|---------------------------------|---------------------------------------------|
 | Who writes the plan | Claude proposes it              | You write it                                |
 | Iteration           | Single pass - approve or reject | Multiple critique rounds                    |
-| Persistence         | Lives in conversation only      | Saved in plan.md files                      |
+| Persistence         | Lives in conversation only      | Saved in `plan.md` files                    |
 | Control             | Claude leads, you approve       | You lead, Claude reviews                    |
 | Best for            | Exploring options when unsure   | Executing a change you already have in mind |
 
-Plan Mode is useful when you want Claude to figure out how to do something. My workflow is for when I already know what I want - I just want validation that my plan makes sense before execution.
 
-Another practical difference: the critique step checks if your plan can be split into smaller independent plans. Smaller plans mean smaller context windows, which leads to better execution. Plan Mode does not do this.
-
----
-
-## Example: What a Plan Looks Like
-
-Here is a simple plan I might write:
-
-```markdown
-# Add rate limiting to API endpoints
-
-Implement rate limiting for the public API to prevent abuse.
-
-## Configuration
-
-- Add rate limit settings to config.yaml
-- Default: 100 requests per minute per IP
-- Configurable per endpoint
-
-## Middleware
-
-- Create RateLimiter middleware in src/middleware/
-- Use sliding window algorithm
-- Store counters in Redis (already used for sessions)
-
-## Apply to routes
-
-- Add middleware to all /api/public/* routes
-- Return 429 Too Many Requests when limit exceeded
-- Include Retry-After header in response
-```
-
-After running `/plan-critique`, Claude might respond with:
-
-- "Line 12: src/middleware/ directory does not exist - the project uses src/lib/ for utilities"
-- "Redis is not used for sessions in this project - check src/config/database.ts, sessions use PostgreSQL"
-- "Consider adding the rate limit configuration to the existing src/config/api.ts instead of creating a new file"
-
-I update my plan based on this feedback, run critique (`/plan-critique`) again, and repeat until the issues are resolved.
+The critique step also checks if your plan can be **split** into smaller independent plans.  
+Smaller plans mean smaller context windows, which leads to better execution. Plan Mode does not do this.
 
 ---
 
 ## Setting Up Your Project Standards
 
-The critique step relies on having a CLAUDE.md file in your project root. This file tells Claude about your project conventions. It does not need to be complicated. Here is an example:
-
-```markdown
-# Project Standards
-
-## Architecture
-- Express.js backend with TypeScript
-- PostgreSQL database with Prisma ORM
-- All new code goes in src/
-
-## Conventions
-- Use snake_case for database columns
-- Use camelCase for TypeScript variables
-- Error responses follow RFC 7807 format
-
-## Testing
-- Jest for unit tests
-- Test files live next to source files (foo.ts, foo.test.ts)
-```
-
+The critique step relies on having a CLAUDE.md file in your project root. This file tells Claude about your project conventions. It does not need to be complicated.
 When Claude critiques your plan, it checks against these standards. If your plan proposes putting code in the wrong place or using the wrong naming convention, the critique will catch it.
 
-Hint: If you're lazy, just tell Claude Code to generate a `CLAUDE.md` file for you and then you can adjust it.
+Hint: If you're lazy, just tell Claude Code to generate a `CLAUDE.md` file for you, and then you can adjust it.
 
 ---
 
@@ -212,5 +166,6 @@ Restart Claude Code if it is already running, then run `/plan-create` to start y
 
 ---
 
-If you work with Claude Code on existing projects and want more control over how changes are planned and executed, give this a try.
 
+[0] Yes, even Waterfall is designed as an iterative process, read the [original paper](https://www.praxisframework.org/files/royce1970.pdf) by Winston Royce.  
+[1] Claude's Plan Mode - https://code.claude.com/docs/en/common-workflows#use-plan-mode-for-safe-code-analysis

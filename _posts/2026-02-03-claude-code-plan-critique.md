@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Claude Code - Plan, Critique, Execute"
+title: "Claude Code - Plan, Critique, Execute, Archive"
 description: "A custom workflow using Claude Code slash commands to write plans, get AI critiques, iterate, and execute - keeping you in control of code changes."
 date: 2026-02-03 10:00:00 +0000
 categories: [ai-workflows, developer-tools]
@@ -102,6 +102,15 @@ This catches problems **before** any code is written. The critique might tell me
 After a few iterations, when the critique comes back clean, I know the plan is solid and execution will go smoothly.
 Most of the time, it has the right result. It matters a lot how much effort I've put into the original plan.
 I also felt that "planning" in a single-dimensional file starts to be limiting ... I wonder what improvements can be done in this area.
+
+## Why Archiving?
+
+Plans are saved in `.planning/archive/[plan name]` so you don't lose them.
+Later, when you want to revisit or re-refactor an older change, you can reference the original plan: _"Hey Claude, remember `.planning/archive/JIRA-1234/plan.md`? Now I want something else..."_
+
+This saves backtracking and helps Claude set an immediate context.
+
+Hint: If your archived plan folder contains old spec files (PDFs, docs), these come in handy when re-establishing context.
 
 ---
 

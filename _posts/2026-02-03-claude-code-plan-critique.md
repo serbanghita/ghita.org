@@ -9,14 +9,13 @@ tags: [claude-code, llm, planning, software-development]
 
 > How I Use Claude Code for Planning Changes in My Projects
 
-If you think about it, every new change in your software, whether is it a **new feature**, **refactor**, **bug fix** or complex **docs** or **specs**,
-you will have a Planning phase. I want to catch all the potential problems in the Planning phase, I don't want to deal with multiple issues
-later when the software project already contains a lot of code, I want to minimize my mental gymnastics later by making a little effort to iterate 
-and re-think my Plan over and over before I Execute it.
+If you think about it, every change in your software—be it a **new feature**, **refactor**, **bug fix**, or **complex docs**—requires a planning phase.  
+
+I want to catch potential problems early—not deal with them later when the codebase has grown. By iterating on my plan before executing it, I minimize the mental gymnastics down the road.
 
 So I built a simple workflow using Claude Code slash commands that lets me write a plan, get feedback on it, iterate until I'm happy, and only then execute it.
 
-The repository is at [https://github.com/serbanghita/claude-code-plan-critique](https://github.com/serbanghita/claude-code-plan-critique).
+The repository is at [serbanghita/claude-code-plan-critique](https://github.com/serbanghita/claude-code-plan-critique).
 
 ---
 
@@ -35,7 +34,7 @@ I wanted to **stay in control** of my project while **letting go** of the coding
 Building software is an iterative phase. Call it Waterfall[0], Agile, Lean or whatever the army of consultants and coaches
 stamped into your engineer lizard brain as the right process of developing software is, they all have on thing in common: **iterations**
 
-The iteration comes from `You: Updating the Plan` and then `Claude Code: Critique of Plan`.
+The iteration comes from the loop of _You_: "Updating the Plan" and then _Claude Code_: "Criticizing the Plan".
 
 ```
   ┌─────────────┐
@@ -86,7 +85,7 @@ in your Claude Code console do the following:
 
 ---
 
-## Why This Works for Me
+## Why This Works
 
 The key, as I said before, is the iteration loop between writing (you) and critique (Claude).  
 I'm not asking Claude to write the plan for me - **I write it myself**. 
